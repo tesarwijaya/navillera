@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  d-navillera:
+    container_name: "d-navillera"
+    image: d-navillera:latest
+    build:
+      context: .
+      dockerfile: ./dockerfiles/app.docker.dev
+    env_file: .env
+    ports:
+      - "50050:50050"
+    volumes:
+        - .:/usr/src/app
+    networks:
+      - default
+      - bridge-network
+networks:
+  default:
+    driver: bridge
+  bridge-network:
+    external: true
